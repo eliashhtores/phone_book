@@ -1,0 +1,20 @@
+{% extends "person/base_person.html" %}
+{% block title %}Phone Book{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="row mt-5">
+        <div>
+            <h1>Phone book</h1>
+            <input type="text" class="form-control form-control-lg mb-4" placeholder="Search..." id="name" name="name">
+            <div id="person_list"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- <script src="{% static 'js/person_catalog.js' %}"></script> -->

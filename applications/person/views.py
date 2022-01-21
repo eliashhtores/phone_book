@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from .models import Person
 
 
@@ -8,3 +8,7 @@ class PersonListView(ListView):
 
     def get_queryset(self):
         return Person.objects.all()
+
+
+class PersonSearchView(TemplateView):
+    template_name = 'person/search.html'
