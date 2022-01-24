@@ -16,4 +16,6 @@ urlpatterns = [
          api_views.PersonDestroyApiView.as_view(), name='api_delete'),
     path('api/v1/reunion/list', api_views.ReunionListApiView.as_view(),
          name='api_reunion_list'),
+    path('api/v1/person/update/<pk>',
+         api_views.PersonUpdateApiView.as_view(), name='api_update'),
 ]
