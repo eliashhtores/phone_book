@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView
-from .models import Person
-from .serializers import PersonSerializer
+from .models import Person, Reunion
+from .serializers import PersonSerializer, ReunionSerializer
 
 
 class PersonListApiView(ListAPIView):
@@ -32,3 +32,8 @@ class PersonRetrieveApiView(RetrieveAPIView):
 class PersonDestroyApiView(DestroyAPIView):
     serializer_class = PersonSerializer
     queryset = Person.objects.all()
+
+
+class ReunionListApiView(ListAPIView):
+    serializer_class = ReunionSerializer
+    queryset = Reunion.objects.all()
