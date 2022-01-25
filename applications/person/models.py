@@ -1,5 +1,6 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
+from .managers import ReunionManager
 
 
 class Hobby(TimeStampedModel):
@@ -31,6 +32,8 @@ class Reunion(TimeStampedModel):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
+
+    objects = ReunionManager()
 
     def __str__(self):
         return self.subject

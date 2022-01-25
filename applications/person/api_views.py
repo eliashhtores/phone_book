@@ -1,16 +1,14 @@
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
+from .serializers import PersonSerializer, ReunionSerializer, ReunionLinkedSerializer, PersonPaginatedSerializer, ReunionByPersonJobSerializer
 from .models import Person, Reunion
-from .serializers import PersonSerializer, ReunionSerializer
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, RetrieveUpdateAPIView
-from .models import Person
-from .serializers import PersonSerializer
 
 
 class PersonListApiView(ListAPIView):
     serializer_class = PersonSerializer
+    pagination_class = PersonPaginatedSerializer
 
     def get_queryset(self):
-        return Person.objects.all()
+        return Person.objects.all().order_by('id')
 
 
 class PersonSearchApiView(ListAPIView):
@@ -37,11 +35,23 @@ class PersonDestroyApiView(DestroyAPIView):
     queryset = Person.objects.all()
 
 
+class PersonUpdateApiView(RetrieveUpdateAPIView):
+    serializer_class = PersonSerializer
+    queryset = Person.objects.all()
+
+
 class ReunionListApiView(ListAPIView):
     serializer_class = ReunionSerializer
     queryset = Reunion.objects.all()
 
 
-class PersonUpdateApiView(RetrieveUpdateAPIView):
-    serializer_class = PersonSerializer
-    queryset = Person.objects.all()
+class ReunionLinkedApiView(ListAPIView):
+    serializer_class = ReunionLinkedSerializer
+    queryset = Reunion.objects.all()
+
+
+class ReunionByPersonJob(ListAPIView):
+    serializer_class = ReunionByPersonJobSerializer
+
+    def get_queryset(self):
+        return Reunion.objects.get_reunion_job()
